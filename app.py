@@ -1,39 +1,43 @@
-from flask import Flask, render_template, request
-from flask_sqlalchemy import  SQLAlchemy
+from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///PythonProject1.db'
-db = SQLAlchemy(app)
 
-class Post(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(300), nullable=False)
-    text = db.Column(db.Text, nullable=False)
+# Список для хранения информации о проектах
+projects = []
+
 
 @app.route('/')
-@app.route('/index')# Декоратор для гравной страницы
 def index():
-    return render_template('index.html')  # файл index.html должен быть в папке templates
+    return render_template('index.html', projects=projects)
 
 
-@app.route('/about')# Декоратор для аторичных страниц
-def about():
-    return render_template('about.html')  # создайте about.html в templates
+@app.route('/add_project', methods=['GET', 'POST'])
+def add_project():
+    if request.method == 'POST':
+        project_name = request.form['project_name']
+        performer = request.form['performer']
+        producer = request.form['producer']
+        client_company = request.form['client_company']
+        work_date = request.form['work_date']
+
+        # Добавление нового проекта в список
+        projects.append({
+            'project_name': project_name,
+            'performer': performer,
+            'producer': producer,
+            'client_company': client_company,
+            'work_date': work_date
+        })
+
+        return redirect(url_for('index'))
+
+    return render_template('add_project.html')  # GET-запрос
 
 
-@app.route("/create", methods=['POST', 'GET'])
-def create():
-    if request.method == "POST":
-        print(request.form['project_name'])
-        print(request.form['at_work'])
-        print(request.form['deadline'])
-        print(request.form['composition_genre'])
-        print(request.form['composition'])
-        print(request.form['project_status'])
-        print(request.form['clip'])
-    else:
-        return render_template('create.html')# файл index.html должен быть в папке templates
+@app.route('/calculator')
+def calculator():
+    return redirect("https://www.kontur-extern.ru/info/calculator-sno")
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(debug=True)
