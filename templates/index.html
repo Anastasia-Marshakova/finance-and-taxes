@@ -1,11 +1,33 @@
-{% extends "base.html" %}
-
-{% block title %}
-Проекты
-{% endblock %}
-
-{% block content %}
-<h1>Проекты</h1>
-
-
-{% endblock %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная страница</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Студия Видеомонтажа</h1>
+        <nav>
+            <a href="/">Главная</a>
+            <a href="/add_project">Добавить проект</a>
+            <a href="/calculator">Калькулятор налогов</a>
+        </nav>
+    </header>
+    <div class="container">
+        <h2>Информация о проектах</h2>
+        <ul>
+            {% for project in projects %}
+                <li>
+                    <strong>Название проекта:</strong> {{ project.project_name }} <br>
+                    <strong>Исполнитель:</strong> {{ project.performer }} <br>
+                    <strong>Продюсер:</strong> {{ project.producer }} <br>
+                    <strong>Компания заказчика:</strong> {{ project.client_company }} <br>
+                    <strong>Дата работы:</strong> {{ project.work_date }} <br>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
