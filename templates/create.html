@@ -1,20 +1,38 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить проект</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Студия Видеомонтажа</h1>
+        <nav>
+            <a href="/">Главная</a>
+            <a href="/add_project">Добавить проект</a>
+            <a href="/calculator">Калькулятор налогов</a>
+        </nav>
+    </header>
+    <div class="container">
+        <h2>Добавить новый проект</h2>
+        <form method="POST" action="/add_project">
+            <label for="project_name">Название проекта:</label>
+            <input type="text" id="project_name" name="project_name" required><br>
 
-{% block title %}
-Добавление записи
-{% endblock %}
+            <label for="performer">Исполнитель:</label>
+            <input type="text" id="performer" name="performer" required><br>
 
-{% block content %}
-<h1>Добавление записи</h1>
+            <label for="producer">Продюсер:</label>
+            <input type="text" id="producer" name="producer" required><br>
 
-<form method="post" class="form-control">
-  <input type="text" name="project_name" placeholder="Название проекта" class="form-control"><br>
-  <input type="text" name="at_work" placeholder="В работе у ..." class="form-control"><br>
-  <input type="text" name="deadlines" placeholder="Сроки" class="form-control"><br>
-  <input type="text" name="composition_genre" placeholder="Жанр композиции" class="form-control"><br>
-  <input type="url" name="composition" placeholder="Композиция" class="form-control"><br>
-  <input type="text" name="project_status" placeholder="Статус проекта" class="form-control"><br>
-  <input type="url" name="clip" placeholder="Клип" class="form-control"><br>
+            <label for="client_company">Компания заказчика:</label>
+            <input type="text" id="client_company" name="client_company" required><br>
 
-  <button class="btn btn-success" type="submit">Добавить</button>y=
-{% endblock %}
+            <label for="work_date">Дата работы:</label>
+            <input type="date" id="work_date" name="work_date" required><br>
+
+            <button type="submit">Добавить проект</button>
+        </form>
+    </div
