@@ -5,17 +5,3 @@
     "test": "echo 'Тесты запущены!'"
   }
 }
-steps:
-  - name: Checkout code
-    uses: actions/checkout@v4
-
-  - name: Debug - List files
-    run: ls -la  # Покажет все файлы в корне
-
-  - name: Setup Node.js
-    uses: actions/setup-node@v4
-    with:
-      node-version: 20
-
-  - name: Install dependencies
-    run: npm install
